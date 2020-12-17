@@ -32,7 +32,10 @@ class Discussion
     {
         $this->id = $id;
         $this->participants = $participants;
-        $this->messages = $messages;
+        $this->messages = array_map(
+            function (Message $message) { $message->setDiscussion($this); return $message; },
+            $messages
+        );
     }
 
     /**
